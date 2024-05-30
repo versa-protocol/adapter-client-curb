@@ -1,23 +1,45 @@
 # adapter-client-curb
 
-An "adapter client" designed to consume Curb receipts and forward them to the Versa protocol
+An adapter client designed to consume Curb rides and forward them to the Versa protocol
 
 ## Prerequisites
 
-Before you can send join the network, you'll need to register with the protocol.
+Before you can send receipts across the network, you'll need to register with the protocol.
 
 1. Sign up for a developer account at https://app.versa.org
-2. Configure your profile and learn about your receipt schema in the [Studio](https://app.versa.org/studio) or [Docs](https://docs.versa.org)
+2. Configure your profile and learn about our receipt schema in the [Studio](https://app.versa.org/studio) or [Docs](https://docs.versa.org)
 3. Issue client credentials for the sandbox environment
 4. When ready, email support@versa.org and we'll verify your account and gate you into the production environment
 
-## Installation
+## Setup and Deployment
 
-More soon... 
+Since this adapter does not have an authentication step, we recommend deploying the image in your cloud with internal access limits. You can get the latest image from Docker Hub, here: https://hub.docker.com/r/versaprotocol/adapter-client-curb
+
+Set your Versa Client ID, Client Secret, and the Registry URL as environment variables for the deployed container. The Registry URL should always be https://registry.versa.org unless you are using a custom registry for testing purposes. See [Environment](#Environment) for more details.
+
+## Usage
+
+The deployed container listens for POST requests at the root URL to which it is deployed (on port 8000).
+
+The request body should contain a JSON object structured as follows, where the ride is a full `Ride` object as specified in the [Curb API Docs](https://bookwithcurb.docs.apiary.io/#reference/endpoints/rides/retrieve-a-ride), complete with bill: 
+
+```sh
+{
+    "ride": { 
+        "id": 36,
+        ...
+    },
+    "customer_email": "mike@bloomberg.com"
+}
+```
+
+This payload should be sent once the bill is paid by the customer. The email is required for us to route Versa receipts to customers by domain.
 
 ## Environment
 
-You can view an example "env" file in the root of this repository. In production, you'll set each of these variables on the deployed Docker image 
+You can view an example "env" file in the root of this repository. In production, you'll set each of these variables on the deployed Docker container.
+
+You can issue client credentials at https://app.versa.org
 
 ```bash
  # Your Versa client ID 

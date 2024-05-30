@@ -11,7 +11,7 @@ pub struct Payload {
 pub async fn target(
     Json(body): Json<Payload>,
 ) -> Result<http::StatusCode, (http::StatusCode, String)> {
-    // 1. Transform Curb receipt into the Versa receipt schema
+    // 1. Transform Curb ride into the Versa receipt schema
     let customer_email = body.customer_email.clone();
     let receipt = crate::data_adapter::transform_curb_receipt(body.receipt);
     let sender_client_id = std::env::var("CLIENT_ID").unwrap();
