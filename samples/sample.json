@@ -1,0 +1,72 @@
+{
+    "id": 36,
+    "pickup_location": {
+        "line1": "1111 Mount Vernon Ave",
+        "line2": "#12",
+        "city": "Alexandria",
+        "state": "VA",
+        "postal_code": "22305",
+        "latitude": 38.840698,
+        "longitude": -77.063103
+    },
+    "dropoff_location": {
+        "line1": "2321 18th St NW",
+        "line2": null,
+        "city": "Washington",
+        "state": "DC",
+        "postal_code": "20009",
+        "latitude": 38.920266,
+        "longitude": -77.041580
+    },
+    "status": {
+        "status_code": "assigned",
+        "distance_from_pickup": 3.9887,
+        "distance_units": "miles",
+        "vehicle_latitude": 38.806049,
+        "vehicle_longitude": -77.052197
+    },
+    "vehicle": {
+        "driver_id": "05274353",
+        "driver_incentive": 0.0,
+        "driver_name": "MELLARD",
+        "vehicle_number": "123",
+        "estimated_fare": 0,
+        "vehicle_type_subclass": "BLACK"
+    },
+    "bill": {
+        "items": { 
+            "service_fee": 0,
+            "fare": 300,
+            "improvement_surcharge": 30,
+            "state_surcharge": 50,
+            "sales_tax": 353,
+            "tip": 76,
+            "toll": 0
+        },
+        "total": 809,
+        "currency_code": "USD"
+    },
+    "metadata": {
+        "external_ride_id": "7074",
+        "external_user_id": "A348",
+        "other_example_key": "some value"
+    },
+     "rider": {
+        "id": 70846,
+        "name": "Y F"
+    },
+    "details": {
+        "external_ride_id": "C_113835025",
+        "is_no_show": false,
+        "is_wav_ride": false,
+        "is_flat_fare": true,
+        "notes": null,
+        "cancel_fee": 0.0,
+        "copay": null,
+        "streethail": false,
+        "partner_code": "CURB"
+    },
+    "created_at": "2016/03/05 22:59:18 +0000",
+    "pickup_time": "2016/03/06 12:00:00 +0000",
+    "driver_phone": "7039912227"
+}

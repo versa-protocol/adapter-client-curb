@@ -1,0 +1,26 @@
+[package]
+name = "adapter-client-curb"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aes-siv = "0.7.0"
+axum = "0.7.5"
+chrono = "0.4.38"
+dotenv = "0.15.0"
+http = "1.1.0"
+hyper = "1.3.1"
+json-canon = "0.1.3"
+openssl = { version = "0.10", features = ["vendored"] }
+rand = "0.8.5"
+reqwest = { version = "0.11.23", features = ["json"] }
+serde = "1.0.200"
+serde_json = "1.0.116"
+tokio = { version = "1.37", features = ["full"] }
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+versa_unstable_schema = "0.2.6"
+
+[dev-dependencies]
+pretty_assertions = "1.3.0"
+rusty-hook = "0.11.2"
