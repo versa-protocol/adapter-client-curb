@@ -1,5 +1,4 @@
 use axum::extract::Json;
-use axum::http::HeaderMap;
 
 use crate::protocol::encrypt_and_send;
 

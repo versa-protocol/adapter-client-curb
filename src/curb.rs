@@ -26,13 +26,13 @@ pub struct Bill {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Items {
-    pub service_fee: i64,
-    pub fare: i64,
-    pub improvement_surcharge: i64,
-    pub state_surcharge: i64,
-    pub sales_tax: i64,
-    pub tip: i64,
-    pub toll: i64,
+    pub service_fee: Option<i64>,
+    pub fare: Option<i64>,
+    pub improvement_surcharge: Option<i64>,
+    pub state_surcharge: Option<i64>,
+    pub sales_tax: Option<i64>,
+    pub tip: Option<i64>,
+    pub toll: Option<i64>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

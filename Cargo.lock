@@ -1644,9 +1644,9 @@ checksum = "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426"
 
 [[package]]
 name = "versa_unstable_schema"
-version = "0.2.6"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a485565c5c3128d65dd6a68454cbbdd5ce6b8c98883fe71351a687a5bcea08a"
+checksum = "b3eabe7ffec31d93c5ba790ebc617339ac7e74824d799f3b7c5c56ae6c936a23"
 dependencies = [
  "serde",
  "serde_json",
