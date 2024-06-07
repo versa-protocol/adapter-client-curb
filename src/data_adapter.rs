@@ -1,4 +1,4 @@
-use crate::curb::{CurbReceipt, Items};
+use crate::curb::{Items, Ride};
 
 use versa_unstable_schema::receipt::{
     AddressClass, Header, Itemization, Receipt, TaxElement, TransitRoute,
@@ -14,7 +14,7 @@ pub fn parse_dt_to_unix(datetime: &str) -> Option<i64> {
     }
 }
 
-pub fn transform_curb_receipt(receipt: CurbReceipt) -> Receipt {
+pub fn transform_curb_receipt(receipt: Ride) -> Receipt {
     let bill = receipt.bill;
 
     Receipt {

@@ -4,7 +4,7 @@ use crate::protocol::encrypt_and_send;
 
 #[derive(Debug, serde::Deserialize)]
 pub struct Payload {
-    pub receipt: crate::curb::CurbReceipt,
+    pub ride: crate::curb::Ride,
     pub customer_email: Option<String>,
 }
 
@@ -13,7 +13,7 @@ pub async fn target(
 ) -> Result<http::StatusCode, (http::StatusCode, String)> {
     // 1. Transform Curb ride into the Versa receipt schema
     let customer_email = body.customer_email.clone();
-    let receipt = crate::data_adapter::transform_curb_receipt(body.receipt);
+    let receipt = crate::data_adapter::transform_curb_receipt(body.ride);
     let sender_client_id = std::env::var("CLIENT_ID").unwrap();
     info!("Received invoice for customer email: {:?}", customer_email);
 

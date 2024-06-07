@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use versa_unstable_schema::receipt::Currency;
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CurbReceipt {
+pub struct Ride {
     pub id: i64,
     pub pickup_location: Location,
     pub dropoff_location: Location,
