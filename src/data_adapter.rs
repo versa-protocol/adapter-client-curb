@@ -1,7 +1,7 @@
 use crate::curb::{Items, Ride};
 
 use versa_unstable_schema::receipt::{
-    AddressClass, Header, Itemization, Receipt, TaxElement, TransitRoute,
+    AddressClass, Header, Itemization, Receipt, TaxElement, TransitRouteClass,
 };
 
 /// parses an epoch time from a datetime of the format YYYY/MM/DD hh:mm:ss +offset (e.g. "2016/03/05 22:59:18 +0000")
@@ -20,27 +20,28 @@ pub fn transform_curb_receipt(receipt: Ride) -> Receipt {
     Receipt {
         actions: Some(vec![]),
         header: Header {
-            amount: bill.total,
+            total: bill.total,
             currency: bill.currency_code,
             customer: None,
             location: None,
             mcc: Some("4121".into()),
             receipt_id: receipt.id.to_string(),
-            subtotal: bill.items.fare,
+            subtotal: bill.items.fare.unwrap_or(bill.total),
             third_party: None,
             created_at: parse_dt_to_unix(&receipt.created_at)
                 .expect("Improperly formatted created_at field"),
+            paid: bill.total,
         },
         itemization: Itemization {
             general: Default::default(),
             lodging: Default::default(),
             ecommerce: Default::default(),
             car_rental: Default::default(),
-            transit_route: Some(TransitRoute {
+            transit_route: Some(TransitRouteClass {
                 departure_address: Some(transform_address(receipt.pickup_location)),
                 arrival_address: Some(transform_address(receipt.dropoff_location)),
-                arrival_time: parse_dt_to_unix(&receipt.created_at),
-                departure_time: parse_dt_to_unix(&receipt.pickup_time),
+                arrival_at: parse_dt_to_unix(&receipt.created_at),
+                departure_at: parse_dt_to_unix(&receipt.pickup_time),
                 invoice_level_discounts: None,
                 metadata: None,
                 polyline: None,
@@ -50,8 +51,8 @@ pub fn transform_curb_receipt(receipt: Ride) -> Receipt {
             subscription: Default::default(),
             flight: Default::default(),
         },
-        payment: None,
         version: "0.2.0".into(),
+        payments: None,
     }
 }
 
@@ -64,9 +65,9 @@ fn transform_address(location: crate::curb::Location) -> AddressClass {
         city: Some(location.city),
         region: Some(location.state),
         postal_code: Some(location.postal_code),
-        country: "US".into(),
-        lat: location.latitude,
-        lon: location.longitude,
+        country: Some("US".into()),
+        lat: Some(location.latitude),
+        lon: Some(location.longitude),
     }
 }
 
@@ -125,9 +126,9 @@ mod adapter_tests {
         assert_eq!(address.city, Some("New York".into()));
         assert_eq!(address.region, Some("NY".into()));
         assert_eq!(address.postal_code, Some("10001".into()));
-        assert_eq!(address.country, "US");
-        assert_eq!(address.lat, 40.7128);
-        assert_eq!(address.lon, -74.0060);
+        assert_eq!(address.country.unwrap(), "US");
+        assert_eq!(address.lat.unwrap(), 40.7128);
+        assert_eq!(address.lon.unwrap(), -74.0060);
 
         let location2 = crate::curb::Location {
             line1: "123 Main St".into(),
