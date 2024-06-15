@@ -47,6 +47,7 @@ pub fn transform_curb_receipt(receipt: Ride) -> Receipt {
                 polyline: None,
                 taxes: Some(transform_taxes(&bill.items)),
                 tip: bill.items.tip,
+                fare: bill.items.fare.unwrap_or(bill.total),
             }),
             subscription: Default::default(),
             flight: Default::default(),
